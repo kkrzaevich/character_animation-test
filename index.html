@@ -1,461 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        #canvas1 {
+            border: 5px solid black;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 512px;
+            height: 512px;
+        }
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        img {
-            width: 500px;
-        }
-
-        button {
-            width: 100px;
-            height: 50px;
-        }
-
-        body {
-            background-color: antiquewhite;
-        }
-    </style>
 </head>
 <body>
-    <img src="StonksMan/Idle/StonksMan_00001.png">
-    <button onclick="changeAnimation(castImages)">Cast</button>
-    <button onclick="changeAnimation(takeDamageImages)">Damage</button>
-    <button onclick="changeAnimation(winImages)">Win</button>
-    <button onclick="changeAnimation(loseImages)">Lose</button>
-</body>
-<script>
-    let image = document.querySelector("img");
-    let idleImages = [
-        "StonksMan/Idle/StonksMan_00001.png",
-        "StonksMan/Idle/StonksMan_00002.png",
-        "StonksMan/Idle/StonksMan_00003.png",
-        "StonksMan/Idle/StonksMan_00004.png",
-        "StonksMan/Idle/StonksMan_00005.png",
-        "StonksMan/Idle/StonksMan_00006.png",
-        "StonksMan/Idle/StonksMan_00007.png",
-        "StonksMan/Idle/StonksMan_00008.png",
-        "StonksMan/Idle/StonksMan_00009.png",
-        "StonksMan/Idle/StonksMan_00010.png",
-        "StonksMan/Idle/StonksMan_00011.png",
-        "StonksMan/Idle/StonksMan_00011.png",
-        "StonksMan/Idle/StonksMan_00012.png",
-        "StonksMan/Idle/StonksMan_00013.png",
-        "StonksMan/Idle/StonksMan_00014.png",
-        "StonksMan/Idle/StonksMan_00015.png",
-        "StonksMan/Idle/StonksMan_00016.png",
-        "StonksMan/Idle/StonksMan_00017.png",
-        "StonksMan/Idle/StonksMan_00018.png",
-        "StonksMan/Idle/StonksMan_00019.png",
-        "StonksMan/Idle/StonksMan_00020.png",
-        "StonksMan/Idle/StonksMan_00021.png",
-        "StonksMan/Idle/StonksMan_00022.png",
-        "StonksMan/Idle/StonksMan_00023.png",
-        "StonksMan/Idle/StonksMan_00024.png",
-        "StonksMan/Idle/StonksMan_00025.png",
-        "StonksMan/Idle/StonksMan_00026.png",
-        "StonksMan/Idle/StonksMan_00027.png",
-        "StonksMan/Idle/StonksMan_00028.png",
-        "StonksMan/Idle/StonksMan_00029.png",
-        "StonksMan/Idle/StonksMan_00030.png",
-        "StonksMan/Idle/StonksMan_00031.png",
-        "StonksMan/Idle/StonksMan_00032.png",
-        "StonksMan/Idle/StonksMan_00033.png",
-        "StonksMan/Idle/StonksMan_00034.png",
-        "StonksMan/Idle/StonksMan_00035.png",
-        "StonksMan/Idle/StonksMan_00036.png",
-        "StonksMan/Idle/StonksMan_00037.png",
-        "StonksMan/Idle/StonksMan_00038.png",
-        "StonksMan/Idle/StonksMan_00039.png",
-        "StonksMan/Idle/StonksMan_00040.png",
-        "StonksMan/Idle/StonksMan_00041.png",
-        "StonksMan/Idle/StonksMan_00042.png",
-        "StonksMan/Idle/StonksMan_00043.png",
-        "StonksMan/Idle/StonksMan_00044.png",
-        "StonksMan/Idle/StonksMan_00045.png",
-        "StonksMan/Idle/StonksMan_00046.png",
-        "StonksMan/Idle/StonksMan_00047.png",
-        "StonksMan/Idle/StonksMan_00048.png",
-        "StonksMan/Idle/StonksMan_00049.png",
-        "StonksMan/Idle/StonksMan_00050.png",
-        "StonksMan/Idle/StonksMan_00051.png",
-        "StonksMan/Idle/StonksMan_00052.png",
-        "StonksMan/Idle/StonksMan_00053.png",
-        "StonksMan/Idle/StonksMan_00054.png",
-        "StonksMan/Idle/StonksMan_00055.png",
-        "StonksMan/Idle/StonksMan_00056.png",
-        "StonksMan/Idle/StonksMan_00057.png",
-        "StonksMan/Idle/StonksMan_00058.png",
-        "StonksMan/Idle/StonksMan_00059.png",
-        "StonksMan/Idle/StonksMan_00060.png",
-        "StonksMan/Idle/StonksMan_00061.png",
-        "StonksMan/Idle/StonksMan_00062.png",
-        "StonksMan/Idle/StonksMan_00063.png",
-        "StonksMan/Idle/StonksMan_00064.png",
-        "StonksMan/Idle/StonksMan_00065.png",
-        "StonksMan/Idle/StonksMan_00066.png",
-        "StonksMan/Idle/StonksMan_00067.png",
-        "StonksMan/Idle/StonksMan_00068.png",
-        "StonksMan/Idle/StonksMan_00069.png",
-        "StonksMan/Idle/StonksMan_00070.png",
-        "StonksMan/Idle/StonksMan_00071.png",
-        "StonksMan/Idle/StonksMan_00072.png",
-    ]
+    <canvas id="canvas1"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas1');
+        const ctx = canvas.getContext('2d');
+        const CANVAS_WIDTH = canvas.width = 512;
+        const CANVAS_HEIGHT = canvas.height = 512;
 
-    // Блюр не работает
-    let castImages = [
-        "StonksMan/Cast/StonksMan_Cast_00001.png",
-        "StonksMan/Cast/StonksMan_Cast_00002.png",
-        "StonksMan/Cast/StonksMan_Cast_00003.png",
-        "StonksMan/Cast/StonksMan_Cast_00004.png",
-        "StonksMan/Cast/StonksMan_Cast_00005.png",
-        "StonksMan/Cast/StonksMan_Cast_00006.png",
-        "StonksMan/Cast/StonksMan_Cast_00007.png",
-        "StonksMan/Cast/StonksMan_Cast_00008.png",
-        "StonksMan/Cast/StonksMan_Cast_00009.png",
-        "StonksMan/Cast/StonksMan_Cast_00010.png",
-        "StonksMan/Cast/StonksMan_Cast_00011.png",
-        "StonksMan/Cast/StonksMan_Cast_00011.png",
-        "StonksMan/Cast/StonksMan_Cast_00012.png",
-        "StonksMan/Cast/StonksMan_Cast_00013.png",
-        "StonksMan/Cast/StonksMan_Cast_00014.png",
-        "StonksMan/Cast/StonksMan_Cast_00015.png",
-        "StonksMan/Cast/StonksMan_Cast_00016.png",
-        "StonksMan/Cast/StonksMan_Cast_00017.png",
-        "StonksMan/Cast/StonksMan_Cast_00018.png",
-        "StonksMan/Cast/StonksMan_Cast_00019.png",
-        "StonksMan/Cast/StonksMan_Cast_00020.png",
-        "StonksMan/Cast/StonksMan_Cast_00021.png",
-        "StonksMan/Cast/StonksMan_Cast_00022.png",
-        "StonksMan/Cast/StonksMan_Cast_00023.png",
-        "StonksMan/Cast/StonksMan_Cast_00024.png",
-        "StonksMan/Cast/StonksMan_Cast_00025.png",
-        "StonksMan/Cast/StonksMan_Cast_00026.png",
-        "StonksMan/Cast/StonksMan_Cast_00027.png",
-        "StonksMan/Cast/StonksMan_Cast_00028.png",
-        "StonksMan/Cast/StonksMan_Cast_00029.png",
-        "StonksMan/Cast/StonksMan_Cast_00030.png",
-        "StonksMan/Cast/StonksMan_Cast_00031.png",
-        "StonksMan/Cast/StonksMan_Cast_00032.png",
-        "StonksMan/Cast/StonksMan_Cast_00033.png",
-        "StonksMan/Cast/StonksMan_Cast_00034.png",
-        "StonksMan/Cast/StonksMan_Cast_00035.png",
-        "StonksMan/Cast/StonksMan_Cast_00036.png",
-        "StonksMan/Cast/StonksMan_Cast_00037.png",
-        "StonksMan/Cast/StonksMan_Cast_00038.png",
-        "StonksMan/Cast/StonksMan_Cast_00039.png",
-        "StonksMan/Cast/StonksMan_Cast_00040.png",
-        "StonksMan/Cast/StonksMan_Cast_00041.png",
-        "StonksMan/Cast/StonksMan_Cast_00042.png",
-        "StonksMan/Cast/StonksMan_Cast_00043.png",
-        "StonksMan/Cast/StonksMan_Cast_00044.png",
-        "StonksMan/Cast/StonksMan_Cast_00045.png",
-        "StonksMan/Cast/StonksMan_Cast_00046.png",
-        "StonksMan/Cast/StonksMan_Cast_00047.png",
-        "StonksMan/Cast/StonksMan_Cast_00048.png",
-        "StonksMan/Cast/StonksMan_Cast_00049.png",
-        "StonksMan/Cast/StonksMan_Cast_00050.png",
-        "StonksMan/Cast/StonksMan_Cast_00051.png",
-        "StonksMan/Cast/StonksMan_Cast_00052.png",
-        "StonksMan/Cast/StonksMan_Cast_00053.png",
-        "StonksMan/Cast/StonksMan_Cast_00054.png",
-        "StonksMan/Cast/StonksMan_Cast_00055.png",
-        "StonksMan/Cast/StonksMan_Cast_00056.png",
-        "StonksMan/Cast/StonksMan_Cast_00057.png",
-        "StonksMan/Cast/StonksMan_Cast_00058.png",
-        "StonksMan/Cast/StonksMan_Cast_00059.png",
-        "StonksMan/Cast/StonksMan_Cast_00060.png",
-        "StonksMan/Cast/StonksMan_Cast_00061.png",
-        "StonksMan/Cast/StonksMan_Cast_00062.png",
-        "StonksMan/Cast/StonksMan_Cast_00063.png",
-        "StonksMan/Cast/StonksMan_Cast_00064.png",
-        "StonksMan/Cast/StonksMan_Cast_00065.png",
-        "StonksMan/Cast/StonksMan_Cast_00066.png",
-        "StonksMan/Cast/StonksMan_Cast_00067.png",
-        "StonksMan/Cast/StonksMan_Cast_00068.png",
-        "StonksMan/Cast/StonksMan_Cast_00069.png",
-        "StonksMan/Cast/StonksMan_Cast_00070.png",
-        "StonksMan/Cast/StonksMan_Cast_00071.png",
-        "StonksMan/Cast/StonksMan_Cast_00072.png",
-    ]
+        const playerImage = new Image();
+        playerImage.src = "cast.png";
 
-    let takeDamageImages = [
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00001.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00002.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00003.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00004.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00005.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00006.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00007.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00008.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00009.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00010.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00011.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00011.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00012.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00013.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00014.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00015.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00016.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00017.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00018.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00019.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00020.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00021.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00022.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00023.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00024.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00025.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00026.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00027.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00028.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00029.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00030.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00031.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00032.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00033.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00034.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00035.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00036.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00037.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00038.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00039.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00040.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00041.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00042.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00043.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00044.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00045.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00046.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00047.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00048.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00049.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00050.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00051.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00052.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00053.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00054.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00055.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00056.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00057.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00058.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00059.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00060.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00061.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00062.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00063.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00064.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00065.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00066.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00067.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00068.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00069.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00070.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00071.png",
-        "StonksMan/TakeDamage/StonksMan_TakeDamage_00072.png",
-    ]
+        let frame = 0;
 
-    let winImages = [
-        "StonksMan/Win/StonksMan_Win_00001.png",
-        "StonksMan/Win/StonksMan_Win_00002.png",
-        "StonksMan/Win/StonksMan_Win_00003.png",
-        "StonksMan/Win/StonksMan_Win_00004.png",
-        "StonksMan/Win/StonksMan_Win_00005.png",
-        "StonksMan/Win/StonksMan_Win_00006.png",
-        "StonksMan/Win/StonksMan_Win_00007.png",
-        "StonksMan/Win/StonksMan_Win_00008.png",
-        "StonksMan/Win/StonksMan_Win_00009.png",
-        "StonksMan/Win/StonksMan_Win_00010.png",
-        "StonksMan/Win/StonksMan_Win_00011.png",
-        "StonksMan/Win/StonksMan_Win_00011.png",
-        "StonksMan/Win/StonksMan_Win_00012.png",
-        "StonksMan/Win/StonksMan_Win_00013.png",
-        "StonksMan/Win/StonksMan_Win_00014.png",
-        "StonksMan/Win/StonksMan_Win_00015.png",
-        "StonksMan/Win/StonksMan_Win_00016.png",
-        "StonksMan/Win/StonksMan_Win_00017.png",
-        "StonksMan/Win/StonksMan_Win_00018.png",
-        "StonksMan/Win/StonksMan_Win_00019.png",
-        "StonksMan/Win/StonksMan_Win_00020.png",
-        "StonksMan/Win/StonksMan_Win_00021.png",
-        "StonksMan/Win/StonksMan_Win_00022.png",
-        "StonksMan/Win/StonksMan_Win_00023.png",
-        "StonksMan/Win/StonksMan_Win_00024.png",
-        "StonksMan/Win/StonksMan_Win_00025.png",
-        "StonksMan/Win/StonksMan_Win_00026.png",
-        "StonksMan/Win/StonksMan_Win_00027.png",
-        "StonksMan/Win/StonksMan_Win_00028.png",
-        "StonksMan/Win/StonksMan_Win_00029.png",
-        "StonksMan/Win/StonksMan_Win_00030.png",
-        "StonksMan/Win/StonksMan_Win_00031.png",
-        "StonksMan/Win/StonksMan_Win_00032.png",
-        "StonksMan/Win/StonksMan_Win_00033.png",
-        "StonksMan/Win/StonksMan_Win_00034.png",
-        "StonksMan/Win/StonksMan_Win_00035.png",
-        "StonksMan/Win/StonksMan_Win_00036.png",
-        "StonksMan/Win/StonksMan_Win_00037.png",
-        "StonksMan/Win/StonksMan_Win_00038.png",
-        "StonksMan/Win/StonksMan_Win_00039.png",
-        "StonksMan/Win/StonksMan_Win_00040.png",
-        "StonksMan/Win/StonksMan_Win_00041.png",
-        "StonksMan/Win/StonksMan_Win_00042.png",
-        "StonksMan/Win/StonksMan_Win_00043.png",
-        "StonksMan/Win/StonksMan_Win_00044.png",
-        "StonksMan/Win/StonksMan_Win_00045.png",
-        "StonksMan/Win/StonksMan_Win_00046.png",
-        "StonksMan/Win/StonksMan_Win_00047.png",
-        "StonksMan/Win/StonksMan_Win_00048.png",
-        "StonksMan/Win/StonksMan_Win_00049.png",
-        "StonksMan/Win/StonksMan_Win_00050.png",
-        "StonksMan/Win/StonksMan_Win_00051.png",
-        "StonksMan/Win/StonksMan_Win_00052.png",
-        "StonksMan/Win/StonksMan_Win_00053.png",
-        "StonksMan/Win/StonksMan_Win_00054.png",
-        "StonksMan/Win/StonksMan_Win_00055.png",
-        "StonksMan/Win/StonksMan_Win_00056.png",
-        "StonksMan/Win/StonksMan_Win_00057.png",
-        "StonksMan/Win/StonksMan_Win_00058.png",
-        "StonksMan/Win/StonksMan_Win_00059.png",
-        "StonksMan/Win/StonksMan_Win_00060.png",
-        "StonksMan/Win/StonksMan_Win_00061.png",
-        "StonksMan/Win/StonksMan_Win_00062.png",
-        "StonksMan/Win/StonksMan_Win_00063.png",
-        "StonksMan/Win/StonksMan_Win_00064.png",
-        "StonksMan/Win/StonksMan_Win_00065.png",
-        "StonksMan/Win/StonksMan_Win_00066.png",
-        "StonksMan/Win/StonksMan_Win_00067.png",
-        "StonksMan/Win/StonksMan_Win_00068.png",
-        "StonksMan/Win/StonksMan_Win_00069.png",
-        "StonksMan/Win/StonksMan_Win_00070.png",
-        "StonksMan/Win/StonksMan_Win_00071.png",
-        "StonksMan/Win/StonksMan_Win_00072.png",
-    ]
+        let gameFrame = 0;
+        const staggerFrames = 4;
 
-    let loseImages = [
-        "StonksMan/Lose/StonksMan_Lose_00001.png",
-        "StonksMan/Lose/StonksMan_Lose_00002.png",
-        "StonksMan/Lose/StonksMan_Lose_00003.png",
-        "StonksMan/Lose/StonksMan_Lose_00004.png",
-        "StonksMan/Lose/StonksMan_Lose_00005.png",
-        "StonksMan/Lose/StonksMan_Lose_00006.png",
-        "StonksMan/Lose/StonksMan_Lose_00007.png",
-        "StonksMan/Lose/StonksMan_Lose_00008.png",
-        "StonksMan/Lose/StonksMan_Lose_00009.png",
-        "StonksMan/Lose/StonksMan_Lose_00010.png",
-        "StonksMan/Lose/StonksMan_Lose_00011.png",
-        "StonksMan/Lose/StonksMan_Lose_00011.png",
-        "StonksMan/Lose/StonksMan_Lose_00012.png",
-        "StonksMan/Lose/StonksMan_Lose_00013.png",
-        "StonksMan/Lose/StonksMan_Lose_00014.png",
-        "StonksMan/Lose/StonksMan_Lose_00015.png",
-        "StonksMan/Lose/StonksMan_Lose_00016.png",
-        "StonksMan/Lose/StonksMan_Lose_00017.png",
-        "StonksMan/Lose/StonksMan_Lose_00018.png",
-        "StonksMan/Lose/StonksMan_Lose_00019.png",
-        "StonksMan/Lose/StonksMan_Lose_00020.png",
-        "StonksMan/Lose/StonksMan_Lose_00021.png",
-        "StonksMan/Lose/StonksMan_Lose_00022.png",
-        "StonksMan/Lose/StonksMan_Lose_00023.png",
-        "StonksMan/Lose/StonksMan_Lose_00024.png",
-        "StonksMan/Lose/StonksMan_Lose_00025.png",
-        "StonksMan/Lose/StonksMan_Lose_00026.png",
-        "StonksMan/Lose/StonksMan_Lose_00027.png",
-        "StonksMan/Lose/StonksMan_Lose_00028.png",
-        "StonksMan/Lose/StonksMan_Lose_00029.png",
-        "StonksMan/Lose/StonksMan_Lose_00030.png",
-        "StonksMan/Lose/StonksMan_Lose_00031.png",
-        "StonksMan/Lose/StonksMan_Lose_00032.png",
-        "StonksMan/Lose/StonksMan_Lose_00033.png",
-        "StonksMan/Lose/StonksMan_Lose_00034.png",
-        "StonksMan/Lose/StonksMan_Lose_00035.png",
-        "StonksMan/Lose/StonksMan_Lose_00036.png",
-        "StonksMan/Lose/StonksMan_Lose_00037.png",
-        "StonksMan/Lose/StonksMan_Lose_00038.png",
-        "StonksMan/Lose/StonksMan_Lose_00039.png",
-        "StonksMan/Lose/StonksMan_Lose_00040.png",
-        "StonksMan/Lose/StonksMan_Lose_00041.png",
-        "StonksMan/Lose/StonksMan_Lose_00042.png",
-        "StonksMan/Lose/StonksMan_Lose_00043.png",
-        "StonksMan/Lose/StonksMan_Lose_00044.png",
-        "StonksMan/Lose/StonksMan_Lose_00045.png",
-        "StonksMan/Lose/StonksMan_Lose_00046.png",
-        "StonksMan/Lose/StonksMan_Lose_00047.png",
-        "StonksMan/Lose/StonksMan_Lose_00048.png",
-        "StonksMan/Lose/StonksMan_Lose_00049.png",
-        "StonksMan/Lose/StonksMan_Lose_00050.png",
-        "StonksMan/Lose/StonksMan_Lose_00051.png",
-        "StonksMan/Lose/StonksMan_Lose_00052.png",
-        "StonksMan/Lose/StonksMan_Lose_00053.png",
-        "StonksMan/Lose/StonksMan_Lose_00054.png",
-        "StonksMan/Lose/StonksMan_Lose_00055.png",
-        "StonksMan/Lose/StonksMan_Lose_00056.png",
-        "StonksMan/Lose/StonksMan_Lose_00057.png",
-        "StonksMan/Lose/StonksMan_Lose_00058.png",
-        "StonksMan/Lose/StonksMan_Lose_00059.png",
-        "StonksMan/Lose/StonksMan_Lose_00060.png",
-        "StonksMan/Lose/StonksMan_Lose_00061.png",
-        "StonksMan/Lose/StonksMan_Lose_00062.png",
-        "StonksMan/Lose/StonksMan_Lose_00063.png",
-        "StonksMan/Lose/StonksMan_Lose_00064.png",
-        "StonksMan/Lose/StonksMan_Lose_00065.png",
-        "StonksMan/Lose/StonksMan_Lose_00066.png",
-        "StonksMan/Lose/StonksMan_Lose_00067.png",
-        "StonksMan/Lose/StonksMan_Lose_00068.png",
-        "StonksMan/Lose/StonksMan_Lose_00069.png",
-        "StonksMan/Lose/StonksMan_Lose_00070.png",
-        "StonksMan/Lose/StonksMan_Lose_00071.png",
-        "StonksMan/Lose/StonksMan_Lose_00072.png",
-    ]
+        function animate() {
+            ctx.clearRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
+            ctx.drawImage(playerImage, frame * 512, 0, 512, 512, 0, 0, CANVAS_WIDTH,CANVAS_HEIGHT);
 
+            if (gameFrame % staggerFrames === 0) {
+                console.log(gameFrame)
+                if (frame < 71) frame++;
+                else frame = 0;
+            }
 
-    let images = [...idleImages]
-    let currentId = 0;
-
-    const target = new EventTarget();
-
-    let animationPlayer;
-
-    const play = (speed) => {
-        animationPlayer = setInterval(() => {
-        if (currentId < images.length - 1) {
-            currentId++;
-            image.src = images[currentId]
-
-        } else {
-            target.dispatchEvent(new Event('animationEnd'));
-            currentId = 0;
-            image.src = images[currentId]   
+            gameFrame++;
+            requestAnimationFrame(animate);
         }
-        }, speed)
-    }
-
-    play(40);
-      
-
-    // Сделать, чтобы функция выполнялась только в конце idle анимации
-    const changeAnimation = (newImages) => {
-        clearInterval(animationPlayer);
-        play(10);
-
-        target.addEventListener('animationEnd', () => {
-            clearInterval(animationPlayer);
-            play(40);
-
-            images = [...newImages]
-            console.log("animation ends")
-
-            target.addEventListener('animationEnd', () => {
-                images = [...idleImages]
-                console.log("new animation ends")
-            }, { once: true })
-        }, { once: true });
-    }
-
-
-    // Сделать, чтобы после выполнения мы переключались на idle картинки
-
-</script>
+        animate();
+    </script>
+</body>
 </html>
-
